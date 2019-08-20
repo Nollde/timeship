@@ -3,6 +3,7 @@
 import datetime
 
 from collections import defaultdict
+import numpy as np
 
 
 class rec_defaultdict(defaultdict):
@@ -20,13 +21,30 @@ class rec_defaultdict(defaultdict):
 
     def to_dict(self):
         if len(self.keys()) == 0:
-            return self.value.starts
+            return {"__self__": self.value}
         else:
-            return {
+            _ = {
                 key: self[key].to_dict()
                 for key in self.keys()
             }
+            if self.value:
+                _.update({"__self__": self.value})
+            return _
 
+    def to_array(self):
+        if len(self.keys()) == 0:
+            return np.array(self.value.starts)
+        else:
+            _ = np.array([self[key].to_array() for key in self.keys()])
+            if self.value:
+                _ = np.concatenate(
+                    (
+                        np.array([self.value.starts]),
+                        _,
+                    ),
+                    axis=0
+                )
+            return _
 
 class Anchor():
     def __init__(self, id):

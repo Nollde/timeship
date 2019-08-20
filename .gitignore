@@ -1,2 +1,5 @@
 __pycache__
 *.pyc
+timeship.egg-info
+dist
+build

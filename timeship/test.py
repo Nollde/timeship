@@ -14,6 +14,7 @@ def main():
     time.sleep(1)
     timeship.anchor("a/b/y")
     time.sleep(1)
+    from IPython import embed; embed()
 
     print(timeship.anchors.to_dict())
 
