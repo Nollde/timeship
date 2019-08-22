@@ -6,16 +6,13 @@ import timeship
 
 
 def main():
-    timeship.anchor("a/b")
-    time.sleep(1)
-    timeship.anchor("a/c")
-    time.sleep(1)
-    timeship.anchor("a/b/x")
-    time.sleep(1)
     timeship.anchor("a/b/y")
     time.sleep(1)
+    with timeship.Anchor("a"):
+        with timeship.Anchor("b"):
+            with timeship.Anchor("c"):
+                time.sleep(2)
     from IPython import embed; embed()
-
     print(timeship.anchors.to_dict())
 
 

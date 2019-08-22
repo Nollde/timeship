@@ -46,11 +46,26 @@ class rec_defaultdict(defaultdict):
                 )
             return _
 
+
 class Anchor():
     def __init__(self, id):
         self.id = id
         self.starts, self.stops = [], []
         self.is_active = False
+
+    def __enter__(self):
+        self.start()
+        current_scope = get_current_scope()
+        set_current_scope(
+            "/".join([current_scope, self.id]) if len(current_scope) > 0 else self.id
+        )
+        current_scope = get_current_scope()
+        anchors[current_scope].value = self
+        return self
+
+    def __exit__(self, *args):
+        set_current_scope(get_current_scope().rsplit(self.id, 1)[0])
+        self.stop()
 
     def start(self):
         self.starts.append(datetime.datetime.now())
@@ -76,4 +91,15 @@ def plot():
     pass
 
 
+def get_current_scope():
+    global current_scope
+    return current_scope
+
+
+def set_current_scope(id):
+    global current_scope
+    current_scope = id
+
+
+current_scope = ""
 anchors = rec_defaultdict()
