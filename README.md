@@ -14,7 +14,7 @@ pip install timeship
 Simply execute the following python snippet to see the timeship on sea!
 ```python
 import time
-import timeship
+from timeship import timeship
 
 
 with timeship.Anchor("BuildShip"):
@@ -99,7 +99,7 @@ with timeship.Anchor("zdata/augment"):
 ```
 
 ## plotting timing data
-At the end of your code, plot the results by by using the `plot` function. Timeships plotting function (`timeship.plot()`) creates a directory (specified by the `dir` argument) with an index.html containing a d3 plot with the timing data which can be viewed through a webbrowser.
+At the end of your code, plot the results by by using the `plot` function. Timeships plotting function (`timeship.plot()`) creates a directory (specified by the `dir` argument) with an index.html containing an interactive (go ahead and click it) d3 sunburst plot with the timing data which can be viewed through a webbrowser.
 
 ```python
 timeship.plot(dir="timeship")
