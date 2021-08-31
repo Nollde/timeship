@@ -107,3 +107,5 @@ timeship.plot(dir="timeship")
 This will create a new directory (in this case called "timeship") and store an html page, which contains a clear visualization of the timing data.
 
 Sail on through space and time, Arrr!
+
+
